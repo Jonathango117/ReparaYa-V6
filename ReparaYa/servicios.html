@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios y precios — Repara Ya</title>
+  <meta name="description" content="Lista de servicios de reparación de Repara Ya: celulares, tablets y computadores, con precios de referencia y tiempos de entrega.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="status-bar">
+    <div class="container">
+      <span><span class="status-dot" aria-hidden="true"></span>Taller abierto — Lun a sáb, 9:00 a 18:00</span>
+      <span>Bogotá, Colombia</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.png" alt="Repara Ya">
+        <span class="brand-text">REPARA YA<small>SERVICIO TÉCNICO</small></span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">MENÚ</button>
+      <nav class="main-nav" aria-label="Principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html" aria-current="page">Servicios</a></li>
+          <li><a href="agendar.html">Agendar cita</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container" style="padding-top: 3rem;">
+      <p class="hero-order" style="color: var(--amber-600);">CATÁLOGO DE SERVICIOS</p>
+      <h1>Precios claros, sin sorpresas al final.</h1>
+      <p>Estos son valores de referencia. El precio final se confirma después del diagnóstico gratuito, antes de iniciar cualquier reparación.</p>
+    </section>
+
+    <section class="container">
+      <div class="section-head">
+        <h2>Celulares</h2>
+        <span class="section-tag">TIEMPO PROMEDIO: 2 A 4 HORAS</span>
+      </div>
+      <table class="status-table">
+        <caption>Servicios más solicitados para celulares</caption>
+        <thead>
+          <tr>
+            <th scope="col">Servicio</th>
+            <th scope="col">Precio desde</th>
+            <th scope="col">Garantía</th>
+            <th scope="col">Disponibilidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cambio de pantalla</td>
+            <td>$120.000</td>
+            <td>90 días</td>
+            <td><span class="badge badge-ok">Inmediata</span></td>
+          </tr>
+          <tr>
+            <td>Cambio de batería</td>
+            <td>$65.000</td>
+            <td>90 días</td>
+            <td><span class="badge badge-ok">Inmediata</span></td>
+          </tr>
+          <tr>
+            <td>Puerto de carga</td>
+            <td>$50.000</td>
+            <td>60 días</td>
+            <td><span class="badge badge-ok">Inmediata</span></td>
+          </tr>
+          <tr>
+            <td>Daño por líquido</td>
+            <td>$45.000</td>
+            <td>30 días</td>
+            <td><span class="badge badge-progress">Sujeto a diagnóstico</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="container">
+      <div class="section-head">
+        <h2>Tablets y computadores</h2>
+        <span class="section-tag">TIEMPO PROMEDIO: 1 A 2 DÍAS</span>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <span class="card-num">TABLET</span>
+          <h3>Pantalla táctil</h3>
+          <p>Reemplazo de vidrio y módulo táctil para las marcas y modelos más comunes del mercado.</p>
+          <span class="price">Desde $150.000</span>
+        </article>
+        <article class="card">
+          <span class="card-num">TABLET</span>
+          <h3>Batería</h3>
+          <p>Cambio de batería original o certificada, con prueba de carga antes de la entrega.</p>
+          <span class="price">Desde $90.000</span>
+        </article>
+        <article class="card">
+          <span class="card-num">PC</span>
+          <h3>Migración a SSD</h3>
+          <p>Clonado del sistema operativo y datos a disco de estado sólido, sin perder información.</p>
+          <span class="price">Desde $130.000</span>
+        </article>
+        <article class="card">
+          <span class="card-num">PC</span>
+          <h3>Limpieza y mantenimiento</h3>
+          <p>Limpieza interna, cambio de pasta térmica y revisión de temperaturas de trabajo.</p>
+          <span class="price">Desde $70.000</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="card" style="border-left-color: var(--amber-500);">
+        <h3>¿No ves tu problema en la lista?</h3>
+        <p>Cada equipo es distinto. Agenda una cita y te damos un diagnóstico concreto en menos de 30 minutos.</p>
+        <a href="agendar.html" class="btn btn-primary" style="margin-top: 0.75rem;">Agendar diagnóstico</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <h4>Repara Ya</h4>
+        <p>Servicio técnico de celulares, tablets y computadores en Bogotá.</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="agendar.html">Agendar cita</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li>Cra 45 # 12-30, Bogotá</li>
+          <li>contacto@reparaya.co</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Repara Ya. Proyecto académico.</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendar cita — Repara Ya</title>
+  <meta name="description" content="Agenda tu diagnóstico gratuito en Repara Ya. Cuéntanos qué falla presenta tu equipo y te contactamos para confirmar el horario.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="status-bar">
+    <div class="container">
+      <span><span class="status-dot" aria-hidden="true"></span>Taller abierto — Lun a sáb, 9:00 a 18:00</span>
+      <span>Bogotá, Colombia</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.png" alt="Repara Ya">
+        <span class="brand-text">REPARA YA<small>SERVICIO TÉCNICO</small></span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">MENÚ</button>
+      <nav class="main-nav" aria-label="Principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="agendar.html" aria-current="page">Agendar cita</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container" style="padding-top: 3rem; padding-bottom: 1.5rem;">
+      <p class="hero-order" style="color: var(--amber-600);">FORMULARIO DE ORDEN DE SERVICIO</p>
+      <h1>Agenda tu diagnóstico</h1>
+      <p>Completa el formulario con los datos del equipo y de contacto. Te confirmamos el horario disponible más cercano por correo o teléfono.</p>
+    </section>
+
+    <section class="container form-layout" style="padding-top: 0;">
+      <form id="form-cita" novalidate>
+        <div class="field">
+          <label for="nombre">Nombre completo <span class="required-mark">*</span></label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Ej: Jonathan Gómez">
+          <p class="error-msg" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="email">Correo electrónico <span class="required-mark">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="Ej: nombre@correo.com">
+          <p class="error-msg" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="telefono">Teléfono de contacto <span class="required-mark">*</span></label>
+          <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="Ej: 3001234567">
+          <p class="error-msg" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="dispositivo">Tipo de dispositivo <span class="required-mark">*</span></label>
+          <select id="dispositivo" name="dispositivo">
+            <option value="">Selecciona una opción</option>
+            <option value="celular">Celular</option>
+            <option value="tablet">Tablet</option>
+            <option value="computador">Computador</option>
+            <option value="otro">Otro</option>
+          </select>
+          <p class="error-msg" role="alert"></p>
+        </div>
+
+        <fieldset>
+          <legend>Prioridad de la cita</legend>
+          <div class="radio-row">
+            <label><input type="radio" name="prioridad" value="normal" checked> Normal (2 a 3 días)</label>
+            <label><input type="radio" name="prioridad" value="express"> Express (mismo día)</label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="falla">Describe la falla <span class="required-mark">*</span></label>
+          <textarea id="falla" name="falla" placeholder="Ej: la pantalla se ve con líneas verticales desde ayer..."></textarea>
+          <p class="error-msg" role="alert"></p>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Enviar solicitud</button>
+        <p class="form-status" id="form-status" aria-live="polite"></p>
+      </form>
+
+      <aside class="form-notes">
+        <h3>Antes de enviar</h3>
+        <ul>
+          <li>El diagnóstico inicial no tiene costo.</li>
+          <li>Te contactamos en menos de 24 horas hábiles.</li>
+          <li>Trae el equipo y, si es posible, el cargador original.</li>
+          <li>Los campos marcados con <span class="required-mark">*</span> son obligatorios.</li>
+        </ul>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <h4>Repara Ya</h4>
+        <p>Servicio técnico de celulares, tablets y computadores en Bogotá.</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="agendar.html">Agendar cita</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li>Cra 45 # 12-30, Bogotá</li>
+          <li>contacto@reparaya.co</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Repara Ya. Proyecto académico.</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/validation.js"></script>
+</body>
+</html>

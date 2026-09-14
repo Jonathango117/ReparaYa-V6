@@ -1,113 +1,173 @@
-# Repara Ya
+Repara Ya
+Proyecto Integrador — Avance 1: Arquitectura, Maquetación y Validación
+Repara Ya es un servicio técnico especializado en la reparación de celulares, tablets y computadores.
 
-Proyecto integrador — **Avance 1: arquitectura, maquetación y validación**.
+La aplicación web permite que los clientes consulten los servicios disponibles y soliciten una cita de diagnóstico. Además, contempla un módulo administrativo para que el técnico o administrador pueda gestionar las solicitudes y órdenes de servicio.
 
-Repara Ya es un servicio técnico de reparación de celulares, tablets y computadores. La aplicación web permite a un cliente conocer los servicios disponibles y agendar una cita de diagnóstico, y a un administrador del taller gestionar esas solicitudes.
+Este primer avance contempla tres aspectos principales:
 
-Este primer avance cubre:
+Definición de la arquitectura del sistema utilizando el estándar C4, niveles 1 y 2.
+Maquetación de tres vistas principales utilizando HTML5 semántico y CSS3 puro.
+Validación del formulario mediante JavaScript puro, sin utilizar librerías externas.
+1. Arquitectura propuesta — Modelo C4
+La arquitectura se presenta mediante dos niveles del modelo C4:
 
-- Definición de arquitectura con el estándar **C4** (niveles 1 y 2).
-- Maquetación de 3 vistas principales con HTML5 semántico y CSS3 puro, responsivas.
-- Validación de formulario con JavaScript puro (sin librerías).
+Nivel 1: Diagrama de contexto.
+Nivel 2: Diagrama de contenedores.
+1.1 Nivel 1 — Diagrama de contexto
+El diagrama de contexto representa a Repara Ya como sistema principal y muestra los actores externos que interactúan con él.
 
----
+Actores
+Cliente: persona que necesita reparar un celular, tablet o computador.
+Técnico / Administrador: encargado de revisar y gestionar las citas y órdenes de servicio.
+Servicio de correo: sistema externo utilizado para enviar confirmaciones y notificaciones.
+Funcionamiento general
+El cliente utiliza Repara Ya para consultar los servicios disponibles y agendar citas. El técnico o administrador utiliza el sistema para gestionar las citas y las órdenes de servicio.
 
-## 1. Arquitectura propuesta (C4)
+A su vez, Repara Ya se comunica con un servicio externo de correo para enviar las notificaciones correspondientes.
 
-### Nivel 1 — Diagrama de contexto
+1.2 Nivel 2 — Diagrama de contenedores
+El segundo nivel del modelo C4 presenta los principales bloques técnicos que conforman el sistema.
 
-Muestra a Repara Ya como sistema y quiénes interactúan con él.
+Contenedores principales
+Frontend Web: interfaz utilizada por clientes y administradores.
+API Backend: responsable de procesar las solicitudes y exponer los servicios de la aplicación.
+Base de datos: almacena la información de clientes, citas, dispositivos y órdenes de servicio.
+Servicio de correo: encargado del envío de notificaciones.
+Comunicación entre componentes
+El cliente y el administrador acceden al Frontend Web mediante HTTPS.
 
-```mermaid
-C4Context
-    title Diagrama de contexto — Repara Ya
+El frontend consume la API REST del backend, utilizando HTTPS y JSON.
 
-    Person(cliente, "Cliente", "Persona que necesita reparar un celular, tablet o computador")
-    Person(admin, "Técnico / Administrador", "Encargado de revisar y gestionar las citas y órdenes de servicio")
+El backend se comunica con la base de datos PostgreSQL mediante SQL sobre TCP para almacenar y consultar información.
 
-    System(reparaYa, "Repara Ya", "Aplicación web para consultar servicios y agendar citas de reparación")
+Finalmente, el backend se conecta con el servicio de correo mediante una API o SMTP para enviar las notificaciones.
 
-    System_Ext(email, "Servicio de correo", "Envía confirmaciones y notificaciones de la cita")
+2. Componentes y tecnologías por capa
+Capa	Componente	Tecnología propuesta	Comunicación
+Cliente	Frontend Web	HTML5, CSS3, JavaScript y migración futura a React	HTTPS
+Servidor	API Backend	Node.js + Express. Alternativa: Django + DRF	HTTP/HTTPS y JSON
+Datos	Base de datos	PostgreSQL	SQL/TCP
+Externo	Notificaciones	Servicio de correo, por ejemplo SendGrid	API/SMTP
 
-    Rel(cliente, reparaYa, "Consulta servicios y agenda citas", "HTTPS")
-    Rel(admin, reparaYa, "Gestiona citas y órdenes de servicio", "HTTPS")
-    Rel(reparaYa, email, "Envía notificaciones de confirmación", "SMTP/API")
-```
+En esta primera entrega solamente se implementó la capa de frontend.
 
-### Nivel 2 — Diagrama de contenedores
+El backend y la base de datos se encuentran definidos dentro de la arquitectura propuesta, pero su implementación se realizará en las siguientes entregas.
 
-Muestra los grandes bloques técnicos del sistema y cómo se comunican.
+3. Maquetación de las vistas
+Se desarrollaron tres vistas principales para la aplicación web.
 
-```mermaid
-C4Container
-    title Diagrama de contenedores — Repara Ya
+Todas las vistas utilizan HTML5 semántico y CSS3 puro, sin frameworks de estilos.
 
-    Person(cliente, "Cliente")
-    Person(admin, "Técnico / Administrador")
+La interfaz es responsive y está diseñada para adaptarse a:
 
-    System_Boundary(reparaYa, "Repara Ya") {
-        Container(frontend, "Frontend Web", "HTML5, CSS3, JavaScript (futuro: React)", "Interfaz donde el cliente navega servicios y agenda citas")
-        Container(backend, "API Backend", "Node.js + Express (o Django)", "Expone endpoints REST para citas, servicios y usuarios")
-        ContainerDb(db, "Base de datos", "PostgreSQL", "Almacena clientes, citas, dispositivos y órdenes de servicio")
-    }
+Computadores de escritorio.
+Tablets.
+Dispositivos móviles.
+Para la distribución de los elementos se utilizan principalmente CSS Grid y Flexbox, junto con media queries.
 
-    System_Ext(email, "Servicio de correo", "Notificaciones por email")
+3.1 Vista de inicio
+Archivo: index.html
 
-    Rel(cliente, frontend, "Usa", "HTTPS")
-    Rel(admin, frontend, "Usa", "HTTPS")
-    Rel(frontend, backend, "Consume API REST", "HTTPS/JSON")
-    Rel(backend, db, "Lee y escribe datos", "SQL / TCP")
-    Rel(backend, email, "Solicita envío de notificación", "HTTPS/API")
-```
+La página principal contiene:
 
-> Los diagramas están en formato **Mermaid** y se renderizan automáticamente en la vista de este archivo en GitHub. También pueden verse en [mermaid.live](https://mermaid.live) pegando el bloque de código correspondiente.
+Hero principal con la propuesta de valor de Repara Ya.
+Categorías de reparación.
+Información general de los servicios.
+Proceso de atención del taller explicado en cuatro pasos.
+Su objetivo es presentar el servicio y orientar al usuario hacia la consulta de servicios o la solicitud de una cita.
 
-### Componentes y tecnologías por capa
+3.2 Vista de servicios
+Archivo: servicios.html
 
-| Capa | Componente | Tecnología propuesta | Comunicación |
-|---|---|---|---|
-| Cliente | Frontend Web | HTML5, CSS3 (Grid/Flexbox), JavaScript. Migración planeada a **React** | Consume la API vía HTTPS |
-| Servidor | API Backend | **Node.js + Express** (alternativa: Django + DRF) | Recibe peticiones HTTP/HTTPS del frontend, responde en JSON |
-| Datos | Base de datos | **PostgreSQL** | Conexión TCP/SQL desde el backend |
-| Externo | Notificaciones | Servicio de correo (ej: SendGrid) | El backend lo consume vía API/SMTP |
+Esta vista presenta los servicios disponibles para los clientes.
 
-En esta primera entrega solo se implementó la capa de **frontend** (maquetación y validación en el navegador); backend y base de datos quedan definidos a nivel de arquitectura para las siguientes entregas.
+Incluye:
 
----
+Tabla de precios para reparaciones de celulares.
+Tarjetas de servicios para tablets.
+Tarjetas de servicios para computadores.
+La información está organizada para facilitar la consulta de los diferentes tipos de reparación.
 
-## 2. Maquetación de vistas
+3.3 Vista de agendamiento
+Archivo: agendar.html
 
-Se maquetaron 3 vistas principales, todas responsivas (móvil, tablet y escritorio) usando **CSS Grid y Flexbox** con media queries, sin frameworks CSS:
+Esta página contiene el formulario mediante el cual el cliente puede solicitar una cita de diagnóstico.
 
-| Vista | Archivo | Contenido |
-|---|---|---|
-| Inicio | `index.html` | Hero con propuesta de valor, categorías de reparación, proceso del taller en 4 pasos |
-| Servicios | `servicios.html` | Tabla de precios de celulares y tarjetas de servicios para tablets/computadores |
-| Agendar cita | `agendar.html` | Formulario de solicitud de cita con validación en JavaScript |
+El formulario solicita información como:
 
-Puntos de quiebre responsivos: `900px` (tablet) y `640px` (móvil), definidos en `css/style.css`.
+Nombre del cliente.
+Correo electrónico.
+Número de teléfono.
+Tipo de dispositivo.
+Descripción de la falla.
+La información ingresada es validada mediante JavaScript antes de ser enviada.
 
----
+4. Diseño responsive
+El diseño utiliza dos puntos de quiebre principales:
 
-## 3. Validación con JavaScript
+900 px: adaptación para tablets y pantallas medianas.
+640 px: adaptación para dispositivos móviles.
+Estas reglas se encuentran definidas en:
 
-El formulario de **Agendar cita** (`agendar.html`) valida en el cliente, sin recargar la página:
+css/style.css
 
-- **Campos obligatorios:** nombre, correo, teléfono, tipo de dispositivo y descripción de la falla.
-- **Formato de correo:** expresión regular que exige `usuario@dominio.ext`.
-- **Formato de teléfono:** solo dígitos, entre 7 y 10 caracteres.
-- **Longitud mínima:** nombre (3 caracteres) y descripción de la falla (10 caracteres).
-- **Mensajes de error** específicos por campo, mostrados debajo de cada input.
-- **Eventos manejados:** `submit` (valida todo y evita el envío si hay errores), `blur` (valida al salir del campo) e `input` (limpia el error mientras el usuario corrige).
-- Al validar correctamente, se muestra un mensaje de confirmación y el formulario se reinicia.
+El diseño responsive permite reorganizar los elementos de la interfaz dependiendo del tamaño de la pantalla, manteniendo una navegación y visualización adecuada.
 
-Lógica en `js/validation.js`; el menú móvil (independiente de la validación) está en `js/main.js`.
+5. Validación mediante JavaScript
+El formulario de Agendar cita cuenta con validación realizada completamente en el navegador.
 
----
+No se utilizan librerías externas para esta funcionalidad.
 
-## Estructura del repositorio
+5.1 Campos obligatorios
+Los siguientes campos son requeridos:
 
-```
+Nombre.
+Correo electrónico.
+Teléfono.
+Tipo de dispositivo.
+Descripción de la falla.
+Si alguno de estos campos se encuentra vacío, se muestra un mensaje de error específico.
+
+5.2 Validación del correo electrónico
+Se utiliza una expresión regular para comprobar que el correo tenga un formato válido, siguiendo una estructura similar a:
+
+usuario@dominio.ext
+
+5.3 Validación del teléfono
+El número de teléfono debe:
+
+Contener únicamente dígitos.
+Tener entre 7 y 10 caracteres.
+5.4 Longitud mínima
+También se establecen longitudes mínimas para determinados campos:
+
+Nombre: mínimo 3 caracteres.
+Descripción de la falla: mínimo 10 caracteres.
+5.5 Mensajes de error
+Cada campo cuenta con mensajes de error específicos.
+
+Estos mensajes aparecen debajo del campo correspondiente para indicar al usuario qué debe corregir.
+
+5.6 Eventos utilizados
+La validación utiliza los siguientes eventos de JavaScript:
+
+submit: valida todo el formulario y evita su envío cuando existen errores.
+blur: valida el campo cuando el usuario sale de él.
+input: elimina o actualiza el mensaje de error mientras el usuario corrige la información.
+Cuando todos los datos son válidos:
+
+Se muestra un mensaje de confirmación.
+El formulario se reinicia.
+La lógica de validación se encuentra en:
+
+js/validation.js
+
+El menú móvil, que funciona de manera independiente a la validación del formulario, se encuentra en:
+
+js/main.js
+
+6. Estructura del repositorio
 repara-ya/
 ├── index.html
 ├── servicios.html
@@ -120,18 +180,37 @@ repara-ya/
 ├── assets/
 │   └── logo.png
 └── README.md
-```
 
-## Instrucciones de uso
+Descripción de los archivos principales
+index.html: página principal del proyecto.
+servicios.html: página donde se presentan los servicios.
+agendar.html: formulario para solicitar una cita.
+css/style.css: estilos generales y diseño responsive.
+js/main.js: funcionamiento del menú móvil.
+js/validation.js: validación del formulario.
+assets/logo.png: logotipo utilizado en la aplicación.
+README.md: documentación del proyecto.
+7. Instrucciones de uso
+Para ejecutar el proyecto se deben seguir los siguientes pasos:
 
-1. Clonar el repositorio.
-2. Abrir `index.html` en el navegador (no requiere instalación ni servidor).
-   - Recomendado: extensión **Live Server** de VS Code para recarga automática.
-3. Navegar entre las vistas desde el menú superior.
-4. Probar el formulario en `agendar.html`: enviarlo vacío para ver los mensajes de error, y luego completarlo correctamente para ver la confirmación.
+Clonar o descargar el repositorio.
+Abrir la carpeta del proyecto.
+Abrir el archivo index.html en un navegador.
+Navegar entre las diferentes páginas utilizando el menú superior.
+Ingresar a agendar.html para probar el formulario.
+No es necesario instalar dependencias ni configurar un servidor para ejecutar esta primera versión.
 
-## Próximos avances
+Como alternativa, se recomienda utilizar la extensión Live Server de Visual Studio Code para obtener recarga automática durante el desarrollo.
 
-- Implementación del backend (API REST) según el diagrama de contenedores.
-- Conexión a base de datos PostgreSQL.
-- Migración del frontend a React manteniendo la misma estructura de vistas.
+8. Pruebas del formulario
+Para comprobar el funcionamiento de la validación se pueden realizar dos pruebas principales.
+
+Prueba 1 — Formulario vacío
+Enviar el formulario sin completar ningún campo.
+
+Resultado esperado: el sistema debe mostrar los mensajes de error correspondientes a los campos obligatorios.
+
+Prueba 2 — Información válida
+Completar todos los campos utilizando información que cumpla las condiciones establecidas.
+
+Resultado esperado: el sistema debe mostrar un mensaje de confirmación y reiniciar el formulario.
